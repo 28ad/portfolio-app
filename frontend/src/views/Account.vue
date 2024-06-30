@@ -8,7 +8,8 @@ const loggedInUser = ref('');
 const user = computed(() => store.state.user);
 
 console.log(user.value);
-loggedInUser.value = user.value.email
+
+
 
 
 
@@ -16,6 +17,6 @@ loggedInUser.value = user.value.email
 
 <template>
   <h1>My Account</h1>
-  <h2 class="text-white "> Welcome, {{ loggedInUser }}</h2>
+  <h2 v-if="user" class="text-white "> Welcome, {{ loggedInUser }}</h2>
 
 </template>

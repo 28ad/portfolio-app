@@ -41,6 +41,13 @@
           <button>LOG IN</button>
         </div>
 
+        <!-- redirect to login/register -->
+
+        <p class="py-2">
+          <RouterLink to="/register">
+            Don't have an account? Register <span class="text-base underline">here !</span>
+          </RouterLink>
+        </p>
 
       </div>
 
@@ -83,10 +90,10 @@ const userLogin = async () => {
     console.log("User logged in: " + data.user.email);
 
     router.push('/account');
-    
+
   } catch (error) {
-      console.log(error);
-      statusMsg.value = error;
+    console.log(error);
+    statusMsg.value = error;
   }
 
 }
