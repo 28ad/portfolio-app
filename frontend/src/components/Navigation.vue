@@ -1,16 +1,50 @@
 <script setup>
 
+import { supabase } from '@/lib/supabaseClient';
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import store from '@/store/store';
+
+// Get user from store
+const user = computed(() => store.state.user);
+
+// Setup ref to router
+const router = useRouter();
+
+const userLogout = async () => {
+
+  let { error } = await supabase.auth.signOut();
+
+  console.log('user logged out')
+
+};
+
 </script>
 
 <template>
-  <div class="nav-wrap w-screen h-20 bg-custom-blue flex items-center justify-center">
-    <ul class=" text-xl text-white flex justify-center cursor-pointer">
-      <RouterLink to="/"><li class="px-2.5 py-2.5 hover:bg-base rounded-xl">Home</li></RouterLink>
-      <RouterLink to="/account"><li class="px-2.5 py-2.5 hover:bg-base rounded-xl">My Account</li></RouterLink>
+
+  <!-- nav bar layout -->
+  <div class="nav-wrap w-screen h-72 bg-custom-blue flex items-center justify-center md:h-20">
+    <ul class="w-full text-xl text-white flex flex-col justify-center cursor-pointer text-center md:flex-row ">
+      <RouterLink v-if="!user" to="/">
+        <li class="py-2.5 hover:bg-base md:px-2.5 md:py-2.5">Home</li>
+      </RouterLink>
+      <RouterLink to="/dashboard">
+        <li class="py-2.5 hover:bg-base md:px-2.5 md:py-2.5">Dashboard</li>
+      </RouterLink>
+      <RouterLink v-if="!user" to="/register">
+        <li class="py-2.5 hover:bg-base md:px-2.5 md:py-2.5">Register</li>
+      </RouterLink>
+      <RouterLink v-if="!user" to="/login">
+        <li class="py-2.5 hover:bg-base md:px-2.5 md:py-2.5">Login</li>
+      </RouterLink>
+      <RouterLink to="/account">
+        <li class="py-2.5 hover:bg-base md:px-2.5 md:py-2.5">My Account</li>
+      </RouterLink>
+      <li @click="userLogout" class="py-2.5 hover:bg-base md:px-2.5 md:py-2.5">Log Out</li>
     </ul>
   </div>
+
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

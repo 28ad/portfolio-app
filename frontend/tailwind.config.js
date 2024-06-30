@@ -9,6 +9,9 @@ export default {
       colors: {
         'custom-blue' : '#151965',
         'base': '#003285'
+      },
+      fontFamily: {
+        custom: ['Lato']
       }
     },
   },

@@ -1,0 +1,95 @@
+<template>
+
+  <!-- form container -->
+  <div class="flex flex-col justify-center items-center py-10">
+
+    <!-- status/error message -->
+
+    <div v-if="statusMsg" class="w-2/3 bg-red-500 font-bold md:w-1/3 shadow-xl rounded-md">
+      <p class="py-4 pl-2 text-white"> {{ statusMsg }}</p>
+    </div>
+
+    <form form @submit.prevent="userLogin" class="w-2/3 h-1/5 bg-white md:w-2/4 lg:w-1/3 shadow-xl rounded-xl mt-10">
+
+
+      <!-- form header -->
+      <div class="bg-base w-full h-20 border border-custom-blue rounded-t-md flex justify-center items-center">
+        <h1 class="text-2xl text-white font-bold">LOG IN</h1>
+      </div>
+
+
+      <!-- form body -->
+      <div class="border border-custom-blue rounded-b-md w-full flex flex-col items-center py-4 ">
+
+        <div class="flex flex-col w-9/12 py-2">
+          <label class="font-bold flex justify-start" for="email">Email:</label>
+          <input v-model="user_email"
+            class="border border-gray-600 rounded-md text-black placeholder:text-black w-full h-10 pl-2" type="text"
+            name="email" id="email" placeholder="Email Address">
+        </div>
+
+        <div class="flex flex-col w-9/12  py-2">
+          <label class="font-bold flex justify-start" for="password">Passowrd:</label>
+          <input v-model="password"
+            class="border border-gray-600 rounded-md text-black placeholder:text-black w-full h-10 pl-2" type="password"
+            name="password" id="password" placeholder="Password">
+        </div>
+
+        <!-- form button -->
+
+        <div class="py-2 px-10 bg-base font-bold text-white text-xl hover:bg-custom-blue">
+          <button>LOG IN</button>
+        </div>
+
+
+      </div>
+
+    </form>
+
+  </div>
+</template>
+
+<script setup>
+
+
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { supabase } from '@/lib/supabaseClient';
+
+
+
+
+// use router functions
+const router = useRouter();
+
+// set up reactive variables
+
+const user_email = ref('');
+const password = ref('');
+
+const statusMsg = ref('');
+
+const userLogin = async () => {
+
+  try {
+
+    let { data, error } = await supabase.auth.signInWithPassword({
+      email: user_email.value,
+      password: password.value
+    })
+
+    if (error) throw error;
+
+    console.log("User logged in: " + data.user.email);
+
+    router.push('/account');
+    
+  } catch (error) {
+      console.log(error);
+      statusMsg.value = error;
+  }
+
+}
+
+
+</script>
