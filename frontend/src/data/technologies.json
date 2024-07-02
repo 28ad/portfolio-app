@@ -1,0 +1,88 @@
+[
+    {
+        "id": 1,
+        "name": "HTML",
+        "type": "frontend",
+        "img": "./src/assets/others/html.svg"
+    },
+    {
+        "id": 2,
+        "name": "CSS",
+        "type": "frontend",
+        "img": "./src/assets/others/css.svg"
+    },
+    {
+        "id": 3,
+        "name": "JS",
+        "type": "frontend",
+        "img": "./src/assets/pr_languages/javascript.svg"
+    },
+    {
+        "id": 4,
+        "name": "VueJS",
+        "type": "framework",
+        "img": "./src/assets/frameworks/vuejs.svg"
+    },
+    {
+        "id": 5,
+        "name": "React",
+        "type": "framework",
+        "img": "./src/assets/frameworks/react.svg"
+    },
+    {
+        "id": 6,
+        "name": "Angular",
+        "type": "framework",
+        "img": "./src/assets/frameworks/angular.svg"
+    },
+    {
+        "id": 7,
+        "name": "C",
+        "type": "pr_language",
+        "img": "./src/assets/pr_languages/c.svg"
+    },
+    {
+        "id": 8,
+        "name": "C#",
+        "type": "pr_language",
+        "img": "./src/assets/pr_languages/csharp.svg"
+    },
+    {
+        "id": 9,
+        "name": "C++",
+        "type": "pr_language",
+        "img": "./src/assets/pr_languages/c++.svg"
+    },
+    {
+        "id": 10,
+        "name": "Java",
+        "type": "pr_language",
+        "img": "./src/assets/pr_languages/java.svg"
+    },
+    {
+        "id": 11,
+        "name": "Python",
+        "type": "pr_language",
+        "img": "./src/assets/pr_languages/python.svg"
+    },
+    {
+        "id": 12,
+        "name": "MySQL",
+        "type": "database",
+        "img": "./src/assets/databases/mysql.svg"
+    },
+    {
+        "id": 13,
+        "name": "MongoDB",
+        "type": "database",
+        "img": "./src/assets/databases/mongodb.svg"
+    },
+    {
+        "id": 14,
+        "name": "PostgreSQL",
+        "type": "database",
+        "img": "./src/assets/databases/postgresql.svg"
+    }
+
+
+]

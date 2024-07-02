@@ -10,13 +10,23 @@ const user = computed(() => store.state.user);
 console.log(user.value);
 
 
-
+loggedInUser.value = user.value.email;
 
 
 </script>
 
 <template>
-  <h1>My Account</h1>
-  <h2 v-if="user" class="text-white "> Welcome, {{ loggedInUser }}</h2>
+
+      <!-- main grid -->
+
+
+        <!-- profile menu + info -->
+
+
+
+        <!-- account body -->
+
+
+
 
 </template>
