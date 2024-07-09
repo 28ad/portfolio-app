@@ -3,7 +3,7 @@ import Home from '../views/Home.vue'
 import Account from '../views/Account.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
-import Dashboard from '../views/Dashboard.vue'
+import Projects from '../views/Projects.vue'
 import ResetPassword from '../views/ResetPassword.vue'
 
 const router = createRouter({
@@ -30,9 +30,9 @@ const router = createRouter({
       component: Login
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: Dashboard
+      path: '/projects',
+      name: 'projects',
+      component: Projects
     },
     {
       path: '/reset-password',

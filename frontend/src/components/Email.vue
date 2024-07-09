@@ -10,22 +10,22 @@
             <!-- email -->
             <div class="flex flex-col items-center md:items-start w-full">
                 <!-- input fields populated with authenticated user data -->
-                <label class="pt-10 font-bold" for="email">Email:</label>
+                <label class="pt-10 font-bold" for="email">New Email:</label>
                 <input v-model="newEmail" class="border border-black rounded-md pl-2 h-10 w-11/12 md:w-10/12 placeholder:text-black" type="text" name="email"
-                    id="email" v-bind:placeholder="user_email">
+                    id="email">
             </div>
 
             <!-- confirm email -->
             <div class="flex flex-col items-center md:items-start w-full">
                 <!-- input fields populated with authenticated user data -->
-                <label class="pt-10 font-bold" for="confEmail">Confirm new email:</label>
+                <label class="pt-10 font-bold" for="confEmail">Confirm new Email:</label>
                 <input v-model="confEmail" class="border border-black rounded-md pl-2 h-10 w-11/12 md:w-10/12 placeholder:text-black" type="text" name="confEmail"
                     id="confEmail">
             </div>
 
         </div>
 
-        <button @click="updateUserEmail" class="px-8 py-2 mt-4 bg-base text-white font-bold hover:bg-custom-blue">UPDATE</button>
+        <button @click="" class="px-8 py-2 mt-4 bg-base text-white font-bold hover:bg-custom-blue">UPDATE</button>
 
     </div>
 

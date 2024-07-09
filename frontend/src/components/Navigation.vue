@@ -30,8 +30,8 @@ const userLogout = async () => {
       <RouterLink v-if="!user" to="/">
         <li class="py-2.5 hover:bg-base md:px-2.5 md:py-2.5">Home</li>
       </RouterLink>
-      <RouterLink v-if="user" to="/dashboard">
-        <li class="py-2.5 hover:bg-base md:px-2.5 md:py-2.5">Dashboard</li>
+      <RouterLink v-if="user" to="/projects">
+        <li class="py-2.5 hover:bg-base md:px-2.5 md:py-2.5">My Projects</li>
       </RouterLink>
       <RouterLink v-if="!user" to="/register">
         <li class="py-2.5 hover:bg-base md:px-2.5 md:py-2.5">Register</li>
