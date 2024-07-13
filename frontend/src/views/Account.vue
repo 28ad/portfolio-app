@@ -1,10 +1,10 @@
 <template>
   <div class="relative flex flex-col md:flex-row h-[calc(100vh-144px)] md:h-[calc(100vh-80px)] overflow-x-hidden">
     <!-- side menu -->
-    <Sidebar @optionSelected="handleOptionSelected" />
+    <Sidebar @optionSelected="handleOptionSelected"/>
 
     <!-- content -->
-    <div class="flex-1 bg-white p-4 w-screen">
+    <div class="flex-1 bg-white p-4 w-screen md:overflow-y-scroll">
       <component :is="currentComponent" />
     </div>
   </div>
