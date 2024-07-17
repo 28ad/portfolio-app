@@ -5,14 +5,14 @@
 
             <!-- view title  -->
             <h1 class="text-3xl">My Projects</h1>
-            <div class="mt-4 w-11/12 h-[2px] bg-black"></div>
+            <div class="mt-4 w-full h-[2px] bg-black"></div>
 
 
             <!-- project section controls -->
             <div class="flex justify-center items-center mt-4">
                 <!-- create project button -->
                 <button
-                    class="font-bold text-3xl py-1 px-4 bg-base hover:bg-custom-blue cursor-pointer text-white">+</button>
+                   @click="router.push('/projects/create-project')" class="font-bold text-3xl py-1 px-4 bg-base hover:bg-custom-blue cursor-pointer text-white">+</button>
 
                 <!-- search project -->
                 <input class="border border-black py-2 placeholder:pl-2 ml-4" type="text" name="searchProject"
@@ -74,5 +74,10 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { supabase } from '@/lib/supabaseClient';
+
+const router = useRouter();
 
 </script>

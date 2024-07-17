@@ -5,6 +5,7 @@ import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import Projects from '../views/Projects.vue'
 import ResetPassword from '../views/ResetPassword.vue'
+import CreateProject from '../views/CreateProject.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +34,11 @@ const router = createRouter({
       path: '/projects',
       name: 'projects',
       component: Projects
+    },
+    {
+      path: '/projects/create-project',
+      name: 'create-project',
+      component: CreateProject
     },
     {
       path: '/reset-password',

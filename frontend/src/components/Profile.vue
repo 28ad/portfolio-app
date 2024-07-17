@@ -2,17 +2,17 @@
 
     <div class="flex flex-col items-center md:items-start">
         <h1 class="text-3xl">Profile Information</h1>
-        <div class="mt-4 w-11/12 h-[2px] bg-black"></div>
+        <div class="mt-4 w-full h-[2px] bg-black"></div>
 
 
         <!-- Profile content goes here -->
         <div class="flex flex-col md:flex-row items-start w-full">
 
             <!-- username -->
-            <div class="flex flex-col items-center md:items-start w-full">
+            <div class="flex flex-col items-center md:items-start w-full md:w-11/12">
                 <!-- input fields populated with authenticated user data -->
                 <label class="pt-10 font-bold" for="username">Username:</label>
-                <input v-model="newUsername" v-bind:placeholder="username"
+                <input v-model="username" 
                     class="border border-black rounded-md pl-2 h-10 w-11/12 placeholder:text-black" type="text"
                     name="username" id="username">
             </div>
@@ -27,25 +27,28 @@
 
         </div>
 
-        <div class="flex flex-col lg:flex-row w-full">
+        <!-- bio and skills container -->
+
+        <div class="flex flex-col xl:flex-row w-[96%]">
 
             <!-- bio -->
 
-            <div class="flex flex-col md:items-start items-center w-full">
+            <div class="flex flex-col md:items-start items-center w-full md:w-[108%] xl:w-full h-full">
                 <label class="pt-10 font-bold" for="bio">Bio</label>
-                <textarea v-model="newBio" v-bind:placeholder="bio"
-                    class="border-[1px] border-black w-11/12 rounded-md placeholder:text-black" name="bio" id="bio"
-                    cols="30" rows="10" :style="{ resize: 'none' }"></textarea>
+                <textarea v-model="bio" 
+                    class="border-[1px] border-black w-11/12 rounded-md placeholder:text-black lg:pb-[235px]" name="bio"
+                    id="bio" cols="30" rows="10" :style="{ resize: 'none' }"></textarea>
+
                 <button @click="updateProfileInfo"
                     class="px-8 py-2 mt-4 bg-base text-white font-bold hover:bg-custom-blue">UPDATE</button>
             </div>
 
             <!-- account skills/stack/badges -->
 
-            <div class="flex flex-col md:items-start items-center pt-10 w-11/12">
+            <div class="flex flex-col md:items-start items-center pt-10 w-full">
                 <p class="font-bold">Skills</p>
 
-                <div class="w-full border border-black rounded-md flex flex-col">
+                <div class="w-full border border-black rounded-md flex flex-col pb-4">
 
                     <div v-if="!editStackMode" class="flex flex-wrap items-start justify-start">
                         <div v-for="item in techStack" :key="item.id" class="px-4 py-4 cursor-pointer">
@@ -54,9 +57,8 @@
                         </div>
                     </div>
 
-                    <div v-else class="flex flex-wrap">
-                        <div v-for="tech in selectedTechStack" :key="tech.id"
-                            class="p-4 cursor-pointer rounded-md"
+                    <div v-else class="flex flex-wrap overflow-y-scroll h-[240px]">
+                        <div v-for="tech in selectedTechStack" :key="tech.id" class="p-4 cursor-pointer rounded-md"
                             :style="{ backgroundColor: tech.selected ? '#D3D3D3' : 'transparent' }"
                             @click="toggleTechSelection(tech)">
                             <img :src="tech.img" class="size-16" :alt="tech.name">
@@ -73,11 +75,40 @@
 
         </div>
 
-        <h1>social links</h1>
-
-
         <!-- soical links -->
+        <h1 class="text-3xl mt-10">Social Links:</h1>
+        <div class="mt-4 w-full h-[2px] bg-black"></div>
+
+        <!-- github link -->
+        <div class="flex flex-col items-center md:items-start w-full lg:w-2/4">
+            <!-- input fields populated with authenticated user data -->
+            <label class="pt-10 font-bold" for="githubLink">GitHub:</label>
+            <input v-model="githubLink" class="border border-black rounded-md pl-2 h-10 w-11/12 placeholder:text-black"
+                type="text" name="githubLink" id="githubLink">
+        </div>
+
+        <!-- twitter link -->
+        <div class="flex flex-col items-center md:items-start w-full lg:w-2/4">
+            <!-- input fields populated with authenticated user data -->
+            <label class="pt-10 font-bold" for="twitterLink">Twitter:</label>
+            <input v-model="twitterLink" class="border border-black rounded-md pl-2 h-10 w-11/12 placeholder:text-black"
+                type="text" name="twitterLink" id="twitterLink">
+        </div>
+
+        <!-- instagram link -->
+        <div class="flex flex-col items-center md:items-start w-full lg:w-2/4">
+            <!-- input fields populated with authenticated user data -->
+            <label class="pt-10 font-bold" for="instaLink">Instagram:</label>
+            <input v-model="instaLink" class="border border-black rounded-md pl-2 h-10 w-11/12 placeholder:text-black"
+                type="text" name="instaLink" id="instaLink">
+        </div>
+
+        <button @click="updateProfileInfo"
+            class="px-8 py-2 mt-4 bg-base text-white font-bold hover:bg-custom-blue">UPDATE</button>
+
+
     </div>
+
 
 </template>
 
@@ -94,17 +125,16 @@ const username = ref(null);
 const user_email = ref(null);
 const password = ref(null);
 const bio = ref(null);
-const socialLinks = ref(null);
 const techStack = ref(null);
 const techList = techListData;
 const selectedTechStack = ref(null);
 
+const socialLinks = ref(null);
+const githubLink = ref(null);
+const twitterLink = ref(null);
+const instaLink = ref(null);
+
 const editStackMode = ref(false)
-const editLinksMode = ref(false)
-
-
-const newUsername = ref(null);
-const newBio = ref(null);
 
 // Get user from store
 const user = computed(() => store.state.user);
@@ -130,7 +160,9 @@ const fetchUserData = async () => {
         user_email.value = userData.value[0].email;
         password.value = userData.value[0].password;
         bio.value = userData.value[0].bio;
-        socialLinks.value = userData.value[0].social_links;
+        githubLink.value = userData.value[0].social_links.github
+        twitterLink.value = userData.value[0].social_links.twitter
+        instaLink.value = userData.value[0].social_links.instagram
         techStack.value = userData.value[0].tech_stack;
 
         // Compare with user's tech stack to determine selected technologies
@@ -176,11 +208,19 @@ const saveTechStack = async () => {
 const updateProfileInfo = async () => {
     try {
 
+        // Create the new JSON object with the updated social links
+        const newLinksObj = {
+            github: githubLink.value,
+            twitter: twitterLink.value,
+            instagram: instaLink.value
+        };
+
         const { data, error } = await supabase
             .from('users')
             .update({
-                username: newUsername.value,
-                bio: newBio.value
+                username: username.value,
+                bio: bio.value,
+                social_links: newLinksObj 
             })
             .eq('email', user.value.email)
             .select();

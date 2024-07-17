@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col items-center md:items-start">
         <h1 class="text-3xl">Update your email</h1>
-        <div class="mt-4 w-11/12 h-[2px] bg-black"></div>
+        <div class="mt-4 w-full h-[2px] bg-black"></div>
 
 
         <!-- Email content goes here -->
