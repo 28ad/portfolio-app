@@ -25,7 +25,7 @@
 
         </div>
 
-        <button @click="" class="px-8 py-2 mt-4 bg-base text-white font-bold hover:bg-custom-blue">UPDATE</button>
+        <button @click="updateUserEmail" class="px-8 py-2 mt-4 bg-base text-white font-bold hover:bg-custom-blue">UPDATE</button>
 
     </div>
 

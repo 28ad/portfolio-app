@@ -4,98 +4,112 @@
         "name": "HTML",
         "type": "frontend",
         "img": "./src/assets/others/html.svg",
-        "colour": "orange"
+        "colour": "#f06311",
+        "selected": false
     },
     {
         "id": 2,
         "name": "CSS",
         "type": "frontend",
         "img": "./src/assets/others/css.svg",
-        "colour": "blue"
+        "colour": "#302eb8",
+        "selected": false
     },
     {
         "id": 3,
         "name": "JS",
         "type": "frontend",
         "img": "./src/assets/pr_languages/javascript.svg",
-        "colour": "yellow"
+        "colour": "#f2bf07",
+        "selected": false
     },
     {
         "id": 4,
         "name": "VueJS",
         "type": "framework",
         "img": "./src/assets/frameworks/vuejs.svg",
-        "colour": "teal"
+        "colour": "#008080",
+        "selected": false
     },
     {
         "id": 5,
         "name": "React",
         "type": "framework",
         "img": "./src/assets/frameworks/react.svg",
-        "colour": "bright-blue"
+        "colour": "#1FBBE5",
+        "selected": false
     },
     {
         "id": 6,
         "name": "Angular",
         "type": "framework",
         "img": "./src/assets/frameworks/angular.svg",
-        "colour": "red"
+        "colour": "#F21717",
+        "selected": false
     },
     {
         "id": 7,
         "name": "C",
         "type": "pr_language",
         "img": "./src/assets/pr_languages/c.svg",
-        "colour": "blue"
+        "colour": "#1375F4",
+        "selected": false
     },
     {
         "id": 8,
         "name": "C#",
         "type": "pr_language",
         "img": "./src/assets/pr_languages/csharp.svg",
-        "colour": "indigo"
+        "colour": "#4B0082",
+        "selected": false
     },
     {
         "id": 9,
         "name": "C++",
         "type": "pr_language",
         "img": "./src/assets/pr_languages/c++.svg",
-        "colour": "blue"
+        "colour": "#1375F4",
+        "selected": false
     },
     {
         "id": 10,
         "name": "Java",
         "type": "pr_language",
         "img": "./src/assets/pr_languages/java.svg",
-        "colour": "black"
+        "colour": "black",
+        "selected": false
     },
     {
         "id": 11,
         "name": "Python",
         "type": "pr_language",
         "img": "./src/assets/pr_languages/python.svg",
-        "colour": "yellow"
+        "colour": "#FFFF00",
+        "selected": false
     },
     {
         "id": 12,
         "name": "MySQL",
         "type": "database",
         "img": "./src/assets/databases/mysql.svg",
-        "colour": "bright-blue"
+        "colour": "#032094",
+        "selected": false
     },
     {
         "id": 13,
         "name": "MongoDB",
         "type": "database",
         "img": "./src/assets/databases/mongodb.svg",
-        "colour": "green"
+        "colour": "#008000",
+        "selected": false
     },
     {
         "id": 14,
         "name": "PostgreSQL",
         "type": "database",
         "img": "./src/assets/databases/postgresql.svg",
-        "colour": "light-blue"
+        "colour": "#6495ED",
+        "selected": false
     }
 
 

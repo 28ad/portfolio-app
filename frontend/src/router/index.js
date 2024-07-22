@@ -6,6 +6,7 @@ import Login from '../views/Login.vue'
 import Projects from '../views/Projects.vue'
 import ResetPassword from '../views/ResetPassword.vue'
 import CreateProject from '../views/CreateProject.vue'
+import ViewProject from '../views/ViewProject.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +35,11 @@ const router = createRouter({
       path: '/projects',
       name: 'projects',
       component: Projects
+    },
+    {
+      path: '/projects/:projectId',
+      name: 'view-project',
+      component: ViewProject
     },
     {
       path: '/projects/create-project',
