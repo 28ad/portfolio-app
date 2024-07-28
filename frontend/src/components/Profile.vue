@@ -1,6 +1,6 @@
 <template>
 
-    <div class="flex flex-col items-center md:items-start">
+    <div class="flex flex-col items-center md:items-start overflow-x-hidden">
         <h1 class="text-3xl">Profile Information</h1>
         <div class="mt-4 w-full h-[2px] bg-black"></div>
 

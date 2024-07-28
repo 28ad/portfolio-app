@@ -55,7 +55,7 @@ const router = createRouter({
     },
     {
       path: '/user/:userId',
-      name: 'create-project',
+      name: 'user-profile',
       component: UserProfile
     },
     {

@@ -1,9 +1,10 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { supabase } from '@/lib/supabaseClient';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
+const router= useRouter();
 const searchParam = route.params.param;
 
 const searchResults = ref([]);
@@ -11,6 +12,9 @@ const searchKey = ref('');
 const matchingResults = ref(false);
 const lastQuery = ref('');
 
+// const selectedUserId = ref('');
+
+// query DB using params sent from the nav search bar
 const dbSearchQuery = async () => {
     try {
         let { data: users, error } = await supabase
@@ -33,6 +37,7 @@ const dbSearchQuery = async () => {
     }
 }
 
+// query DB from the page
 const localDbSearchQuery = async () => {
     try {
         let { data: users, error } = await supabase
@@ -54,13 +59,21 @@ const localDbSearchQuery = async () => {
     }
 }
 
+// redirect user to clicked profile
+
+const toSelectedUserProfile = (selectedUser) => {
+
+    router.push({ name: 'user-profile', params: { userId: selectedUser }});
+
+}
+
 onMounted(() => {
     dbSearchQuery();
 })
 </script>
 
 <template>
-    <div class="flex flex-col justify-center items-center overflow-x-hidden bg-gray-300">
+    <div class="flex flex-col justify-center items-center overflow-x-hidden">
         <!-- header -->
         <div class="w-11/12 flex flex-col items-start justify-center">
             <h1 class="text-3xl mt-10 font-bold">Results for:
@@ -90,7 +103,8 @@ onMounted(() => {
             <div v-for="(result, index) in searchResults" :key="index" class="w-full flex flex-col items-center">
                 <div class="w-32 h-32 mt-4 bg-custom-blue rounded-full"></div>
                 <p class="font-bold text-xl py-2">{{ result.username }}</p>
-                <button class="py-2 mt-2 w-36 bg-base text-white font-bold hover:bg-custom-blue">VIEW PROFILE</button>
+                <button @click="toSelectedUserProfile(result.username)"
+                class="py-2 mt-2 w-36 bg-base text-white font-bold hover:bg-custom-blue">VIEW PROFILE</button>
             </div>
 
             <div class="w-full flex flex-col items-center">

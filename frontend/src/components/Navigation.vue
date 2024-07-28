@@ -5,7 +5,7 @@ import { computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import store from '@/store/store';
 
-const searchParam = ref ('');
+const searchParam = ref('');
 
 // Get user from store
 const user = computed(() => store.state.user);
@@ -27,7 +27,7 @@ const userLogout = async () => {
 
 const searchUserProfile = () => {
 
-  router.push({name: 'search', params: { param: searchParam.value}});
+  router.push({ name: 'search', params: { param: searchParam.value } });
 
 }
 
@@ -42,7 +42,7 @@ const showSearchBar = computed(() => {
 
   <!-- nav bar layout -->
   <div
-    class="nav-wrap w-screen bg-custom-blue flex flex-col md:flex-row items-center justify-center h-60 md:h-20 border-b-[1px] border-blue-300">
+    class="nav-wrap bg-custom-blue flex flex-col md:flex-row items-center justify-center h-60 md:h-20 border-b-[1px] border-blue-300">
 
     <!-- nav links -->
     <ul class="w-full text-xl text-white flex flex-col justify-start cursor-pointer text-center md:flex-row ">
@@ -67,10 +67,19 @@ const showSearchBar = computed(() => {
     <!-- nav seacrh bar -->
     <div v-if="showSearchBar" class="flex flex-row items-center w-full justify-center md:justify-end p-2.5">
 
+      <div class="flex justify-center items-end border-b border-white">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="size-8 text-white">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        </svg>
+
+      </div>
+
       <form @submit.prevent="">
 
         <input type="text" placeholder="Search ..." v-model="searchParam" v-on:keyup.enter="searchUserProfile"
-        class="pl-2 placeholder:text-white placeholder:text-center md:placeholder:text-left text-xl text-white border-b border-white w-32 md:w-60 h-8 bg-custom-blue ">
+          class="pl-2 placeholder:text-white text-center md:text-left placeholder:text-cente focus:outline-none md:placeholder:text-left text-xl text-white border-b border-white w-32 md:w-60 h-8 bg-custom-blue ">
 
       </form>
 
