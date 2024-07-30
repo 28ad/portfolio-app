@@ -2,7 +2,7 @@
     <div class="flex flex-col items-center md:items-start">
 
         <!-- update passoword -->
-        <h1 class="text-3xl">Change your password</h1>
+        <h1 class="text-3xl font-bold">Change your password</h1>
         <div class="mt-4 w-full h-[2px] bg-black"></div>
 
 
@@ -30,7 +30,7 @@
             class="px-8 py-2 mt-4 bg-base text-white font-bold hover:bg-custom-blue">UPDATE</button>
 
         <!-- reset password -->
-        <h1 class="text-3xl pt-4 mt-10">Reset Password</h1>
+        <h1 class="text-3xl pt-4 mt-10 font-bold">Reset Password</h1>
         <div class="mt-4 w-full h-[2px] bg-black"></div>
 
         <button @click="sendPassResetEmail" class="px-8 py-2 mt-4 bg-base text-white font-bold hover:bg-custom-blue">RESET PASSWORD</button>

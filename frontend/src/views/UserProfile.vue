@@ -10,6 +10,7 @@ const userIdParam = route.params.userId;
 
 const userData = ref([]);
 const userId = ref('');
+const userProfilePicture = ref(null);
 
 const fetchUserProfileData = async () => {
 
@@ -24,7 +25,11 @@ const fetchUserProfileData = async () => {
 
         userData.value = users[0];
         userId.value = userData.value.user_id;
-        console.log(userId.value);
+
+        userProfilePicture.value = userData.value.profile_picture;
+
+        console.log(userProfilePicture.value);
+        console.log(userData.value);
 
     } catch (err) {
         console.log(err)
@@ -74,7 +79,11 @@ onMounted(async () => {
 
             <!-- user profile picture -->
 
-            <div class="w-48 h-48 rounded-full bg-custom-blue"></div>
+            <div class="">
+
+                <img :src="userProfilePicture" class="w-48 h-48 rounded-full border-4 border-black">
+
+            </div>
 
             <!-- username and email -->
 
@@ -128,7 +137,7 @@ onMounted(async () => {
 
         <!-- user project section -->
         <div class="w-full flex flex-col items-center md:items-start px-4">
-            <h1 class="text-3xl mt-10 md:mt-0">Projects:</h1>
+            <h1 class="text-3xl mt-10 md:mt-0 font-bold">Projects:</h1>
             <div class="mt-4 w-full h-[2px] bg-black"></div>
         </div>
 

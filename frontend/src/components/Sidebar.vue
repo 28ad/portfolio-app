@@ -2,9 +2,21 @@
     <div class="bg-base w-full md:w-64 h-full flex flex-col items-center md:border-r-[1px] border-blue-300">
         <!-- profile info -->
         <div class="w-full flex flex-col items-center h-2/8 ">
-            <div class="w-32 h-32 mt-4 bg-custom-blue"></div>
-            <h1 class="text-white mt-4">{{ loggedInUser }}</h1>
-            <h1 class="text-white">Username</h1>
+
+            <div class="relative mt-4 w-36 h-36 group">
+                <!-- Profile Picture -->
+                <img :src="userProfilePicture" class="w-36 h-36 rounded-full">
+
+                <!-- Change picture overlay -->
+                <div
+                    class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 group-hover:cursor-pointer transition-opacity duration-300">
+                    <label class="font-bold text-white text-center cursor-pointer" for="images">CHANGE</label>
+                    <input @change="handlePictureUpload" class="hidden" type="file" id="images" />
+                    <!-- <span class="text-white">Change Picture</span> -->
+                </div>
+            </div>
+
+            <h1 class="text-white mt-4 font-bold">{{ loggedInUser }}</h1>
         </div>
 
         <div class="w-5/6 h-[1px] mt-4 mb-4 bg-blue-300"></div>
@@ -48,13 +60,18 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, useSSRContext } from 'vue';
 import store from '@/store/store';
+import { supabase } from '@/lib/supabaseClient';
 
 const loggedInUser = ref('');
+const userProfilePicture = ref('');
 
 // Get user from store
 const user = computed(() => store.state.user);
+
+const image = ref(null);
+const imgUrl = ref(null);
 
 loggedInUser.value = user.value.email;
 
@@ -65,4 +82,96 @@ const selectOption = (option) => {
     // Emit the selected option to the parent component
     emit('optionSelected', option);
 };
+
+// fetch user profile picture
+
+const fetchUserProfilePic = async () => {
+
+    try {
+
+
+        let { data: profilePic, error } = await supabase
+            .from('users')
+            .select('profile_picture')
+
+        if (error) throw error;
+
+        userProfilePicture.value = profilePic[0].profile_picture;
+
+        console.log(userProfilePicture.value);
+
+    } catch (err) {
+
+        console.log(err);
+
+    }
+}
+
+// add uploaded images from the event object into an array and create temp URL
+const handlePictureUpload = async (event) => {
+
+    image.value = event.target.files[0];
+
+    console.log(image.value);
+
+    try {
+
+        const { data, error } = await supabase
+            .storage
+            .from('profile-pictures')
+            .upload(`${loggedInUser.value}/${image.value.name}`, image.value);
+
+        if (error) {
+            console.error('Error uploading file:', error);
+        }
+
+        // retrieve public url link for each image and push into array
+
+        const { data: publicURLData, error: publicURLError } = supabase
+            .storage
+            .from('profile-pictures')
+            .getPublicUrl(`${loggedInUser.value}/${image.value.name}`);
+
+        if (publicURLError) {
+            console.error('Error getting public URL:', publicURLError);
+        }
+
+        imgUrl.value = publicURLData.publicUrl
+
+
+        // Save file URLs in Supabase database
+        await updateProfilePicture(imgUrl);
+
+    } catch (err) {
+        console.error('Error uploading files:', err);
+    }
+}
+
+// change/update user's profile picture
+
+const updateProfilePicture = async (imgUrl) => {
+
+    try {
+
+
+
+        const { data, error } = await supabase
+            .from('users')
+            .update({ profile_picture: imgUrl.value })
+            .eq('email', loggedInUser.value)
+            .select()
+
+
+        if (error) throw error;
+
+        console.log(data);
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+onMounted(() => {
+    fetchUserProfilePic();
+})
 </script>

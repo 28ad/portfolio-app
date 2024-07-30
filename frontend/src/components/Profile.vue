@@ -1,7 +1,7 @@
 <template>
 
     <div class="flex flex-col items-center md:items-start overflow-x-hidden">
-        <h1 class="text-3xl">Profile Information</h1>
+        <h1 class="text-3xl font-bold">Profile Information</h1>
         <div class="mt-4 w-full h-[2px] bg-black"></div>
 
 
@@ -76,7 +76,7 @@
         </div>
 
         <!-- soical links -->
-        <h1 class="text-3xl mt-10">Social Links:</h1>
+        <h1 class="text-3xl mt-10 font-bold">Social Links:</h1>
         <div class="mt-4 w-full h-[2px] bg-black"></div>
 
         <!-- github link -->

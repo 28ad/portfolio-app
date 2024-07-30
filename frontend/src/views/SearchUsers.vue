@@ -101,7 +101,7 @@ onMounted(() => {
         <!-- results -->
         <div v-if="matchingResults" class="w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-10 justify-center mt-10 pb-10">
             <div v-for="(result, index) in searchResults" :key="index" class="w-full flex flex-col items-center">
-                <div class="w-32 h-32 mt-4 bg-custom-blue rounded-full"></div>
+                <img :src="result.profile_picture" class="w-32 h-32 mt-4 bg-custom-blue rounded-full"></img>
                 <p class="font-bold text-xl py-2">{{ result.username }}</p>
                 <button @click="toSelectedUserProfile(result.username)"
                 class="py-2 mt-2 w-36 bg-base text-white font-bold hover:bg-custom-blue">VIEW PROFILE</button>

@@ -4,7 +4,7 @@
         <div class="flex flex-col items-center md:items-start p-4 w-full">
 
             <!-- view title  -->
-            <h1 class="text-3xl">My Projects</h1>
+            <h1 class="text-3xl font-bold">My Projects</h1>
             <div class="mt-4 w-full h-[2px] bg-black"></div>
 
 
