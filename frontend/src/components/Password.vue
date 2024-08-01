@@ -3,7 +3,7 @@
 
         <!-- update passoword -->
         <h1 class="text-3xl font-bold">Change your password</h1>
-        <div class="mt-4 w-full h-[2px] bg-black"></div>
+        <div class="mt-4 w-[92%] h-[2px] bg-black"></div>
 
 
         <!-- Password management content -->
@@ -13,7 +13,7 @@
             <div class="flex flex-col items-center md:items-start w-full">
                 <!-- input fields populated with authenticated user data -->
                 <label class="pt-10 font-bold" for="password">New Password:</label>
-                <input v-model="password" class="border border-black rounded-md pl-2 h-10 w-11/12 md:w-10/12"
+                <input v-model="password" class="border shadow-sm rounded-md pl-2 h-10 w-11/12 md:w-10/12"
                     type="password" name="password" id="password">
             </div>
 
@@ -21,19 +21,13 @@
             <div class="flex flex-col items-center md:items-start w-full">
                 <!-- input fields populated with authenticated user data -->
                 <label class="pt-10 font-bold" for="confPassword">Confirm New Password:</label>
-                <input v-model="confPassword" class="border border-black rounded-md pl-2 h-10 w-11/12 md:w-10/12"
+                <input v-model="confPassword" class="border shadow-sm rounded-md pl-2 h-10 w-11/12 md:w-10/12"
                     type="password" name="confPassword" id="confPassword">
             </div>
 
         </div>
         <button @click="updateUserPassword"
             class="px-8 py-2 mt-4 bg-base text-white font-bold hover:bg-custom-blue">UPDATE</button>
-
-        <!-- reset password -->
-        <h1 class="text-3xl pt-4 mt-10 font-bold">Reset Password</h1>
-        <div class="mt-4 w-full h-[2px] bg-black"></div>
-
-        <button @click="sendPassResetEmail" class="px-8 py-2 mt-4 bg-base text-white font-bold hover:bg-custom-blue">RESET PASSWORD</button>
 
     </div>
 

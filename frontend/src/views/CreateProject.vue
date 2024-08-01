@@ -173,13 +173,13 @@ const saveProject = async (userId, fileUrls, projectUID) => {
 <template>
 
     <div
-        class="flex flex-col items-center md:items-start md:flex-row md:justify-center w-full h-[calc(100vh-144px)] md:h-[calc(100vh-80px)] overflow-x-hidden">
+        class="flex flex-col items-center md:items-start md:flex-row md:justify-center w-full h-[calc(100vh-144px)] md:h-[calc(100vh-80px)] overflow-x-hidden mt-6">
 
         <!-- project images display -->
-        <div class="w-11/12 mt-2 border flex flex-col justify-center items-center">
+        <div class="w-11/12 mt-2 border flex flex-col justify-center items-center ml-8">
 
             <div class="">
-                <img :src="selectedImage" class="max-w-96">
+                <img :src="selectedImage" class="max-w-96 min-w-96">
             </div>
 
             <div v-if="localImageUrls.length > 0" class="pb-4 flex flex-wrap justify-center">
@@ -201,7 +201,7 @@ const saveProject = async (userId, fileUrls, projectUID) => {
 
             <!-- project tags -->
 
-            <div class="flex flex-col items-center w-full">
+            <div class="flex flex-col items-center w-full pb-4">
 
                 <button v-if="!displayTagSelection" @click="toggleTags"
                     class="bg-base px-4 py-1 mb-4 text-white rounded-full hover:bg-custom-blue mt-4">+ ADD TAGS</button>
@@ -241,7 +241,7 @@ const saveProject = async (userId, fileUrls, projectUID) => {
             <!-- Title input -->
             <div class="flex flex-col w-full">
                 <!-- input fields populated with authenticated user data -->
-                <label class="pt-6 font-bold" for="title">Title:</label>
+                <label class="pt-6 font-bold" for="title">Title:<span class="text-red-500">*</span></label>
                 <input v-model="title"
                     class="border border-black rounded-md h-10 md:w-11/12 placeholder:text-black pl-2" type="text"
                     name="title" id="title">
@@ -250,7 +250,7 @@ const saveProject = async (userId, fileUrls, projectUID) => {
             <!-- Project description input -->
             <div class="flex flex-col w-full">
                 <!-- input fields populated with authenticated user data -->
-                <label class="pt-6 font-bold" for="description">Description:</label>
+                <label class="pt-6 font-bold" for="description">Description:<span class="text-red-500">*</span></label>
                 <textarea v-model="description"
                     class="border-[1px] border-black md:w-11/12 h-52 rounded-md placeholder:text-black pl-2"
                     name="description" id="description" cols="10" rows="5" :style="{ resize: 'none' }"></textarea>

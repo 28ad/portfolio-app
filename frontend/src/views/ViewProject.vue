@@ -53,10 +53,10 @@ onMounted(async () => {
 <template>
 
     <div
-        class="flex flex-col items-center md:items-start md:flex-row md:justify-center w-full h-[calc(100vh-144px)] md:h-[calc(100vh-80px)] overflow-x-hidden">
+        class="flex flex-col items-center md:items-start md:flex-row md:justify-center w-full h-[calc(100vh-144px)] md:h-[calc(100vh-80px)] overflow-x-hidden mt-6">
 
         <!-- project images display -->
-        <div class="w-11/12 mt-2 border flex flex-col justify-center items-center">
+        <div class="w-11/12 mt-2 border flex flex-col justify-center items-center ml-8">
 
             <div class="">
                 <img :src="selectedImage" class="max-w-96">

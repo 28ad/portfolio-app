@@ -2,7 +2,7 @@
 
     <div class="flex flex-col items-center md:items-start overflow-x-hidden">
         <h1 class="text-3xl font-bold">Profile Information</h1>
-        <div class="mt-4 w-full h-[2px] bg-black"></div>
+        <div class="mt-4 w-[96%] h-[2px] bg-black"></div>
 
 
         <!-- Profile content goes here -->
@@ -13,15 +13,15 @@
                 <!-- input fields populated with authenticated user data -->
                 <label class="pt-10 font-bold" for="username">Username:</label>
                 <input v-model="username" 
-                    class="border border-black rounded-md pl-2 h-10 w-11/12 placeholder:text-black" type="text"
+                    class="border shadow-sm rounded-md pl-2 h-10 w-11/12 placeholder:text-black" type="text"
                     name="username" id="username">
             </div>
 
             <!-- email -->
-            <div class="flex flex-col items-center md:items-start w-full">
+            <div class="flex flex-col items-center md:items-start w-full ">
                 <!-- input fields populated with authenticated user data -->
                 <label class="pt-10 font-bold" for="email">Email:</label>
-                <input class="border border-gray-400 text-gray-400 rounded-md pl-2 h-10 w-11/12 cursor-not-allowed"
+                <input class="border shadow-sm text-gray-400 rounded-md pl-2 h-10 w-11/12 cursor-not-allowed"
                     type="text" name="email" id="email" v-bind:value="user_email" disabled>
             </div>
 
@@ -33,10 +33,10 @@
 
             <!-- bio -->
 
-            <div class="flex flex-col md:items-start items-center w-full md:w-[108%] xl:w-full h-full">
+            <div class="flex flex-col md:items-start items-center w-full md:w-[108%] xl:w-full h-[395px]">
                 <label class="pt-10 font-bold" for="bio">Bio</label>
                 <textarea v-model="bio" 
-                    class="border-[1px] border-black w-11/12 rounded-md placeholder:text-black lg:pb-[235px]" name="bio"
+                    class="border shadow-md w-11/12 rounded-md placeholder:text-black lg:pb-[235px]" name="bio"
                     id="bio" cols="30" rows="10" :style="{ resize: 'none' }"></textarea>
 
                 <button @click="updateProfileInfo"
@@ -48,16 +48,16 @@
             <div class="flex flex-col md:items-start items-center pt-10 w-full">
                 <p class="font-bold">Skills</p>
 
-                <div class="w-full border border-black rounded-md flex flex-col pb-4">
+                <div class="w-full border shadow-md rounded-md flex flex-col pb-4">
 
-                    <div v-if="!editStackMode" class="flex flex-wrap items-start justify-start">
-                        <div v-for="item in techStack" :key="item.id" class="px-4 py-4 cursor-pointer">
-                            <img :src="item.img" class="size-24" :alt="item.name">
-                            <p class="text-center">{{ item.name }}</p>
+                    <div v-if="!editStackMode" class="grid grid-cols-4 items-center justify-center gap-4">
+                        <div v-for="item in techStack" :key="item.id" class="px-4 py-4 cursor-pointer flex flex-col items-center">
+                            <img :src="item.img" class="size-16" :alt="item.name">
+                            <p class="text-center font-bold">{{ item.name }}</p>
                         </div>
                     </div>
 
-                    <div v-else class="flex flex-wrap overflow-y-scroll h-[240px]">
+                    <div v-else class="flex flex-wrap gap-4 ml-2 overflow-y-scroll h-[240px]">
                         <div v-for="tech in selectedTechStack" :key="tech.id" class="p-4 cursor-pointer rounded-md"
                             :style="{ backgroundColor: tech.selected ? '#D3D3D3' : 'transparent' }"
                             @click="toggleTechSelection(tech)">
@@ -83,7 +83,7 @@
         <div class="flex flex-col items-center md:items-start w-full lg:w-2/4">
             <!-- input fields populated with authenticated user data -->
             <label class="pt-10 font-bold" for="githubLink">GitHub:</label>
-            <input v-model="githubLink" class="border border-black rounded-md pl-2 h-10 w-11/12 placeholder:text-black"
+            <input v-model="githubLink" class="border shadow-sm rounded-md pl-2 h-10 w-11/12 placeholder:text-black"
                 type="text" name="githubLink" id="githubLink">
         </div>
 
@@ -91,7 +91,7 @@
         <div class="flex flex-col items-center md:items-start w-full lg:w-2/4">
             <!-- input fields populated with authenticated user data -->
             <label class="pt-10 font-bold" for="twitterLink">Twitter:</label>
-            <input v-model="twitterLink" class="border border-black rounded-md pl-2 h-10 w-11/12 placeholder:text-black"
+            <input v-model="twitterLink" class="border shadow-sm rounded-md pl-2 h-10 w-11/12 placeholder:text-black"
                 type="text" name="twitterLink" id="twitterLink">
         </div>
 
@@ -99,7 +99,7 @@
         <div class="flex flex-col items-center md:items-start w-full lg:w-2/4">
             <!-- input fields populated with authenticated user data -->
             <label class="pt-10 font-bold" for="instaLink">Instagram:</label>
-            <input v-model="instaLink" class="border border-black rounded-md pl-2 h-10 w-11/12 placeholder:text-black"
+            <input v-model="instaLink" class="border shadow-sm rounded-md pl-2 h-10 w-11/12 placeholder:text-black"
                 type="text" name="instaLink" id="instaLink">
         </div>
 

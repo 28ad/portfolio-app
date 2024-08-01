@@ -15,7 +15,7 @@
                     class="font-bold text-3xl py-1 px-4 bg-base hover:bg-custom-blue cursor-pointer text-white">+</button>
 
                 <!-- search project -->
-                <input class="border border-black py-2 placeholder:pl-2 ml-4" type="text" name="searchProject"
+                <input v-model="searchKey" @input="searchProject" class="border border-black py-2 placeholder:pl-2 ml-4" type="text" name="searchProject"
                     id="searchProject" placeholder="Search...">
                 <button class="font-bold text-3xl py-2 px-2 bg-base hover:bg-custom-blue cursor-pointer text-white">
 
@@ -30,7 +30,8 @@
                 <!-- filters -->
 
                 <!-- sort -->
-                <select class="border border-black py-2 ml-4 text-xl cursor-pointer" name="sortProjects" id="sortProjects">
+                <select v-model="selectedSort" class="border border-black py-2 ml-4 text-xl cursor-pointer" name="sortProjects"
+                    id="sortProjects">
                     <option class="text-xl" value="az-ascending">⬆ A-Z</option>
                     <option class="text-xl" value="az-descending">⬇ Z-A</option>
                     <option class="text-xl" value="date-ascending">⬆ Date</option>
@@ -45,13 +46,14 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-y-10 gap-x-6">
 
                     <!-- individual project card -->
-                    <router-link :to="{name: 'view-project', params: {projectId: pjct.project_uid } }" v-for="(pjct, index) in userProjects" :key="index"
-                        class="border transition-transform transform scale-100 hover:scale-105 duration-500 ease-in-out w-full flex flex-col justify-between cursor-pointer shadow-xl rounded-xl pt-4">
+                    <router-link :to="{ name: 'view-project', params: { projectId: pjct.project_uid } }"
+                         v-for="(pjct, index) in searchResults" :key="index"
+                        class="border transition-transform transform scale-100 hover:scale-105 duration-500 ease-in-out w-full max-h-[350px] min-h-[350px] flex flex-col justify-between cursor-pointer shadow-xl rounded-xl">
 
                         <!-- image and title -->
-                        <div class="flex flex-col items-center">
+                        <div class="flex flex-col items-center h-3/6">
 
-                            <img :src="pjct.image_urls[0]" class="max-w-64">
+                            <img :src="pjct.image_urls[0]" class="max-w-80 h-full">
 
                         </div>
 
@@ -76,7 +78,6 @@
 
                     </router-link>
 
-
                 </div>
 
 
@@ -91,7 +92,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { supabase } from '@/lib/supabaseClient';
 import store from '@/store/store'
@@ -101,6 +102,13 @@ const user = computed(() => store.state.user);
 const router = useRouter();
 
 const userProjects = ref([]);
+const searchResults = ref([]);
+const filteredProjects = ref([]);
+
+const selectedSort = ref('');
+const searchKey = ref('');
+
+
 
 // retrieve and load all authenticated user's projects
 const fetchUserProjects = async () => {
@@ -128,8 +136,47 @@ const fetchUserProjects = async () => {
     }
 }
 
+// query projects which match user input from the search bar
+
+const searchProject = () => {
+    if (!searchKey.value) {
+        searchResults.value = userProjects.value;
+    } else {
+        searchResults.value = userProjects.value.filter(project => 
+            project.title.toLowerCase().includes(searchKey.value.toLowerCase())
+        );
+    }
+}
+
+// handle alphabetical and chronological sorting
+
+
+const sortProjects = () => {
+
+    console.log(selectedSort.value);
+
+    switch (selectedSort.value) {
+        case 'az-ascending':
+            searchResults.value.sort((a, b) => a.title.localeCompare(b.title));
+            break;
+        case 'az-descending':
+            searchResults.value.sort((a, b) => b.title.localeCompare(a.title));
+            break;
+        case 'date-ascending':
+            searchResults.value.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+            break;
+        case 'date-descending':
+            searchResults.value.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            break;
+    }
+}
+
+// Watch for changes in the selected sort option
+watch(selectedSort, sortProjects);
+
 onMounted(async () => {
     await fetchUserProjects();
+    searchResults.value = userProjects.value;
 })
 
 </script>

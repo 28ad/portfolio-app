@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col items-center md:items-start">
         <h1 class="text-3xl font-bold">Update your email</h1>
-        <div class="mt-4 w-full h-[2px] bg-black"></div>
+        <div class="mt-4 w-[92%] h-[2px] bg-black"></div>
 
 
         <!-- Email content goes here -->
@@ -11,7 +11,7 @@
             <div class="flex flex-col items-center md:items-start w-full">
                 <!-- input fields populated with authenticated user data -->
                 <label class="pt-10 font-bold" for="email">New Email:</label>
-                <input v-model="newEmail" class="border border-black rounded-md pl-2 h-10 w-11/12 md:w-10/12 placeholder:text-black" type="text" name="email"
+                <input v-model="newEmail" class="border shadow-sm rounded-md pl-2 h-10 w-11/12 md:w-10/12 placeholder:text-black" type="text" name="email"
                     id="email">
             </div>
 
@@ -19,7 +19,7 @@
             <div class="flex flex-col items-center md:items-start w-full">
                 <!-- input fields populated with authenticated user data -->
                 <label class="pt-10 font-bold" for="confEmail">Confirm new Email:</label>
-                <input v-model="confEmail" class="border border-black rounded-md pl-2 h-10 w-11/12 md:w-10/12 placeholder:text-black" type="text" name="confEmail"
+                <input v-model="confEmail" class="border shadow-sm rounded-md pl-2 h-10 w-11/12 md:w-10/12 placeholder:text-black" type="text" name="confEmail"
                     id="confEmail">
             </div>
 

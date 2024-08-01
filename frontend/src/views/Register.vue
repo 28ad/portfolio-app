@@ -219,7 +219,7 @@ const registerUser = async () => {
       <p class="py-4 pl-2 text-white"> {{ statusMsg }}</p>
     </div>
 
-    <form form @submit.prevent="" class="w-2/3 h-1/5 bg-white md:w-2/3 lg:w-3/5 shadow-xl rounded-xl mt-10">
+    <form form @submit.prevent="" class="w-2/3 h-1/5 bg-white md:w-2/4 lg:w-4/12 shadow-xl rounded-xl mt-10">
 
 
       <!-- form header -->
@@ -302,8 +302,8 @@ const registerUser = async () => {
       <div v-if="regStage === 3"
         class="border border-custom-blue rounded-b-md w-full flex flex-col items-center py-4 px-4">
 
-        <div class="flex flex-col items-center w-9/12 py-2">
-          <h1 class=" lg:text-2xl text-xl font-bold">Select technologies you are familiar with:</h1>
+        <div class="flex flex-col items-center py-2">
+          <h1 class="text-xl font-bold">Select technologies you are familiar with:</h1>
         </div>
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-10">
@@ -312,7 +312,7 @@ const registerUser = async () => {
           <div v-for="item in techList" :key="item.id" @click="toggleTechSelection(item)" class="hover:bg-gray-200"
             :class="{ 'bg-gray-200': selectedTech.includes(item), 'cursor-pointer': true, 'p-4': true, 'rounded-md': true, 'text-center': true }">
             <img v-bind:src="item.img" class="w-28">
-            <p class="text-center">{{ item.name }}</p>
+            <p class="text-center font-bold">{{ item.name }}</p>
           </div>
         </div>
 
