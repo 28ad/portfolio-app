@@ -1,6 +1,6 @@
 <template>
 
-    <div class="w-screen flex flex-col items-center h-[calc(100vh-144px)] md:h-[calc(100vh-80px)] overflow-x-hidden">
+    <div class="w-full flex flex-col items-center overflow-x-hidden">
         <div class="flex flex-col items-center md:items-start p-4 w-full">
 
             <!-- view title  -->
@@ -47,8 +47,9 @@
 
                     <!-- individual project card -->
                     <router-link :to="{ name: 'view-project', params: { projectId: pjct.project_uid } }"
-                         v-for="(pjct, index) in searchResults" :key="index"
-                        class="border transition-transform transform scale-100 hover:scale-105 duration-500 ease-in-out w-full max-h-[350px] min-h-[350px] flex flex-col justify-between cursor-pointer shadow-xl rounded-xl">
+                        v-if="searchResults.length.value > 0"
+                        v-for="(pjct, index) in searchResults" :key="index"
+                        class="border transition-transform transform scale-100 hover:scale-105 duration-500 ease-in-out w-full max-h-[350px] min-h-[350px] flex flex-col justify-between cursor-pointer shadow-md rounded-xl">
 
                         <!-- image and title -->
                         <div class="flex flex-col items-center h-3/6">
@@ -77,6 +78,12 @@
                         </div>
 
                     </router-link>
+
+                    <div v-else>
+
+                        No projects created
+
+                    </div>
 
                 </div>
 

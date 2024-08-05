@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col items-center md:items-start">
+    <div class="flex flex-col items-center md:items-start w-full overflow-x-hidden h-[calc(100vh-112px)]">
 
         <!-- update passoword -->
         <h1 class="text-3xl font-bold">Change your password</h1>

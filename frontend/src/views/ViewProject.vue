@@ -32,7 +32,7 @@ const fetchProjectInfo = async () => {
 
         imageUrls.value = projectInfo.value.image_urls
 
-        selectedImage.value = imageUrls.value;
+        selectedImage.value = imageUrls.value[0];
 
     } catch (err) {
         console.log(err.message)
@@ -53,10 +53,10 @@ onMounted(async () => {
 <template>
 
     <div
-        class="flex flex-col items-center md:items-start md:flex-row md:justify-center w-full h-[calc(100vh-144px)] md:h-[calc(100vh-80px)] overflow-x-hidden mt-6">
+        class="flex flex-col items-center md:items-start md:flex-row md:justify-center w-full overflow-x-hidden mt-6">
 
         <!-- project images display -->
-        <div class="w-11/12 mt-2 border flex flex-col justify-center items-center ml-8">
+        <div class="w-11/12 mt-2 border flex flex-col justify-center items-center md:ml-8">
 
             <div class="">
                 <img :src="selectedImage" class="max-w-96">

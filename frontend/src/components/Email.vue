@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col items-center md:items-start">
+    <div class="flex flex-col items-center md:items-start h-[calc(100vh-112px)]">
         <h1 class="text-3xl font-bold">Update your email</h1>
         <div class="mt-4 w-[92%] h-[2px] bg-black"></div>
 

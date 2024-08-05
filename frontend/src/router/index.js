@@ -9,6 +9,7 @@ import CreateProject from '../views/CreateProject.vue'
 import ViewProject from '../views/ViewProject.vue'
 import SearchUsers from '../views/SearchUsers.vue'
 import UserProfile from '../views/UserProfile.vue'
+import Messenger from '../views/Messenger.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +23,11 @@ const router = createRouter({
       path: '/account',
       name: 'account',
       component: Account
+    },
+    {
+      path: '/messenger',
+      name: 'messenger',
+      component: Messenger
     },
     {
       path: '/register',

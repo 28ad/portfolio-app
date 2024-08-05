@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-base w-full md:w-64 h-full flex flex-col items-center md:border-r-[1px] border-blue-300">
+    <div class="bg-base w-full md:w-64 flex flex-col items-center md:border-r-[1px] border-blue-300">
         <!-- profile info -->
         <div class="w-full flex flex-col items-center h-2/8 ">
 
@@ -93,6 +93,7 @@ const fetchUserProfilePic = async () => {
         let { data: profilePic, error } = await supabase
             .from('users')
             .select('profile_picture')
+            .eq('email', loggedInUser.value);
 
         if (error) throw error;
 
