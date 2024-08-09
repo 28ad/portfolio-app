@@ -47,7 +47,6 @@
 
                     <!-- individual project card -->
                     <router-link :to="{ name: 'view-project', params: { projectId: pjct.project_uid } }"
-                        v-if="searchResults.length.value > 0"
                         v-for="(pjct, index) in searchResults" :key="index"
                         class="border transition-transform transform scale-100 hover:scale-105 duration-500 ease-in-out w-full max-h-[350px] min-h-[350px] flex flex-col justify-between cursor-pointer shadow-md rounded-xl">
 
@@ -78,12 +77,6 @@
                         </div>
 
                     </router-link>
-
-                    <div v-else>
-
-                        No projects created
-
-                    </div>
 
                 </div>
 
