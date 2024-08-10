@@ -13,7 +13,7 @@ const regUserUID = ref('');
 
 const statusMsg = ref('');
 const accepted = ref(false);
-const regStage = ref(3);
+const regStage = ref(1);
 
 const techList = techListData;
 const selectedTech = ref([]);
@@ -29,6 +29,8 @@ const validateEmail = (email) => {
 
 // sign up user with supabase auth
 const authReg = async () => {
+
+  console.log("authReg is called");
   try {
     let { data, error } = await supabase.auth.signUp({
       email: user_email.value,
@@ -195,10 +197,6 @@ async function handleFormStage() {
       regStage.value++;
       break;
 
-    case 3:
-      await registerUser();
-      break;
-
     default:
       break;
   }
@@ -224,6 +222,7 @@ const searchTech = () => {
 
 // wait for auth data to generate -> save account to users table
 const registerUser = async () => {
+  console.log("registerUser function called");
   await authReg();
   await addUser();
 }
@@ -243,7 +242,7 @@ const registerUser = async () => {
       <p class="py-4 text-white"> {{ statusMsg }}</p>
     </div>
 
-    <form form @submit.prevent="" class=" h-1/5 bg-white md:w-2/4 lg:w-4/12 shadow-md rounded-xl">
+    <div class=" h-1/5 bg-white md:w-2/4 lg:w-4/12 shadow-md rounded-xl">
 
 
       <!-- form header -->
@@ -329,7 +328,9 @@ const registerUser = async () => {
           <h1 class="text-xl font-bold w-3/4 text-center">Select technologies you are familiar with:</h1>
         </div>
 
-        <input v-on:keyup.enter="searchTech" v-model="searchTerm"
+        <input 
+        @keyup.enter="searchTech"
+        v-model="searchTerm"
           class="pl-2 border border-gray-400 w-11/12 rounded-md py-2 mt-4" type="text" name="" id=""
           placeholder="Search...">
 
@@ -359,14 +360,14 @@ const registerUser = async () => {
         <!-- form button -->
 
         <div class="mt-4 py-2 px-10 bg-base font-bold text-white text-xl hover:bg-custom-blue cursor-pointer">
-          <button @click="">REGISTER</button>
+          <button @click="registerUser">REGISTER</button>
         </div>
 
 
       </div>
 
 
-    </form>
+    </div>
 
   </div>
 
