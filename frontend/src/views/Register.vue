@@ -13,12 +13,13 @@ const regUserUID = ref('');
 
 const statusMsg = ref('');
 const accepted = ref(false);
-const regStage = ref(1);
+const regStage = ref(3);
 
 const techList = techListData;
 const selectedTech = ref([]);
 const searchResults = ref([]);
 const searchTerm = ref('');
+const noMatchingResults = ref(false);
 
 // validate email format
 const validateEmail = (email) => {
@@ -206,13 +207,19 @@ async function handleFormStage() {
 const searchTech = () => {
 
   searchResults.value = techList.filter((item) => {
-
-    console.log(item);
-
     return item.name.toLowerCase().includes(searchTerm.value.toLowerCase());
-  })
+  });
 
   console.log(searchResults.value);
+  console.log(searchResults.value.length);
+
+  if (searchResults.value.length > 0) {
+    noMatchingResults.value = false;
+  } else {
+    noMatchingResults.value = true;
+  }
+
+  console.log(noMatchingResults.value); // Should reflect the correct value
 }
 
 // wait for auth data to generate -> save account to users table
@@ -316,27 +323,31 @@ const registerUser = async () => {
       </div>
 
       <!-- form body - stage 3 -->
-      <div v-if="regStage === 3"
-        class="border rounded-b-md flex flex-col items-center py-6">
+      <div v-if="regStage === 3" class="border rounded-b-md flex flex-col items-center py-6">
 
         <div class="flex flex-col items-center">
           <h1 class="text-xl font-bold w-3/4 text-center">Select technologies you are familiar with:</h1>
         </div>
 
-        <input 
-        v-on:keyup.enter="searchTech"
-        v-model="searchTerm"
-        class="pl-2 border border-gray-400 w-11/12 rounded-md py-2 mt-4"
-        type="text" name="" id="" placeholder="Search...">
+        <input v-on:keyup.enter="searchTech" v-model="searchTerm"
+          class="pl-2 border border-gray-400 w-11/12 rounded-md py-2 mt-4" type="text" name="" id=""
+          placeholder="Search...">
 
         <div v-if="searchResults.length > 0" class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
 
           <!-- each icons goes here -->
-          <div v-for="item in searchResults" :key="item.id" @click="toggleTechSelection(item)" class="hover:bg-gray-200 flex flex-col items-center"
+          <div v-for="item in searchResults" :key="item.id" @click="toggleTechSelection(item)"
+            class="hover:bg-gray-200 flex flex-col items-center"
             :class="{ 'bg-gray-200': selectedTech.includes(item), 'cursor-pointer': true, 'p-4': true, 'rounded-md': true, 'text-center': true }">
             <img v-bind:src="item.img" class="w-24">
             <p class="text-center font-bold">{{ item.name }}</p>
           </div>
+        </div>
+
+        <div v-else-if="noMatchingResults" class="flex justify-center my-4">
+
+          <p class="text-xl text-center">No mathcing results.</p>
+
         </div>
 
         <div v-else class="flex justify-center my-4">
@@ -348,7 +359,7 @@ const registerUser = async () => {
         <!-- form button -->
 
         <div class="mt-4 py-2 px-10 bg-base font-bold text-white text-xl hover:bg-custom-blue cursor-pointer">
-          <button @click="registerUser">REGISTER</button>
+          <button @click="">REGISTER</button>
         </div>
 
 
