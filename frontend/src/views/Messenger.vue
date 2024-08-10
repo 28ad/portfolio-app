@@ -2,7 +2,7 @@
     <div class="flex overflow-hidden h-[calc(100vh-112px)]">
 
         <!-- Sidebar -->
-        <div class=" bg-white border-r border-gray-300 w-1/4 min-w-[220px]"
+        <div class=" bg-white border-r border-gray-300 w-1/4"
             >
 
             <!-- Sidebar Header -->

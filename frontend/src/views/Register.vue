@@ -14,8 +14,11 @@ const regUserUID = ref('');
 const statusMsg = ref('');
 const accepted = ref(false);
 const regStage = ref(1);
+
 const techList = techListData;
 const selectedTech = ref([]);
+const searchResults = ref([]);
+const searchTerm = ref('');
 
 // validate email format
 const validateEmail = (email) => {
@@ -109,6 +112,8 @@ const checkUsernameAvailability = async () => {
 
 // Toggle tech selection
 const toggleTechSelection = (tech) => {
+  console.log(selectedTech.value);
+
   const index = selectedTech.value.findIndex(item => item.id === tech.id);
   if (index === -1) {
     selectedTech.value.push(tech);
@@ -198,6 +203,18 @@ async function handleFormStage() {
   }
 }
 
+const searchTech = () => {
+
+  searchResults.value = techList.filter((item) => {
+
+    console.log(item);
+
+    return item.name.toLowerCase().includes(searchTerm.value.toLowerCase());
+  })
+
+  console.log(searchResults.value);
+}
+
 // wait for auth data to generate -> save account to users table
 const registerUser = async () => {
   await authReg();
@@ -215,11 +232,11 @@ const registerUser = async () => {
 
     <!-- status/error message -->
 
-    <div v-if="statusMsg" class="w-2/3 bg-red-500 font-bold md:w-2/3 lg:w-3/5 shadow-xl rounded-md">
-      <p class="py-4 pl-2 text-white"> {{ statusMsg }}</p>
+    <div v-if="statusMsg" class=" bg-red-500 font-bold px-20 md:w-2/4 lg:w-4/12 shadow-md rounded-md mb-10">
+      <p class="py-4 text-white"> {{ statusMsg }}</p>
     </div>
 
-    <form form @submit.prevent="" class="w-2/3 h-1/5 bg-white md:w-2/4 lg:w-4/12 shadow-xl rounded-xl mt-10">
+    <form form @submit.prevent="" class=" h-1/5 bg-white md:w-2/4 lg:w-4/12 shadow-md rounded-xl">
 
 
       <!-- form header -->
@@ -229,16 +246,16 @@ const registerUser = async () => {
 
 
       <!-- form body - stage 1 -->
-      <div v-if="regStage === 1" class="border border-custom-blue rounded-b-md w-full flex flex-col items-center py-4">
+      <div v-if="regStage === 1" class="border rounded-b-md flex flex-col items-center p-6">
 
-        <div class="flex flex-col w-9/12 lg:w-3/5 py-2">
+        <div class="flex flex-col w-11/12 py-2">
           <label class="font-bold flex justify-start" for="email">Email:<span class="text-red-500">*</span></label>
           <input v-model="user_email"
             class="border border-gray-600 rounded-md text-black placeholder:text-black w-full h-10 pl-2" type="text"
             name="email" id="email" placeholder="Email Address">
         </div>
 
-        <div class="flex flex-col w-9/12 lg:w-3/5 py-2">
+        <div class="flex flex-col w-11/12 py-2">
           <label class="font-bold flex justify-start" for="password">Passowrd:<span
               class="text-red-500">*</span></label>
           <input v-model="password"
@@ -246,7 +263,7 @@ const registerUser = async () => {
             name="password" id="password" placeholder="Password">
         </div>
 
-        <div class="flex flex-col w-9/12 lg:w-3/5 py-2">
+        <div class="flex flex-col w-11/12 py-2">
           <label class="font-bold flex justify-start" for="confPass">Confirm Password:<span
               class="text-red-500">*</span></label>
           <input v-model="confPassword"
@@ -279,9 +296,9 @@ const registerUser = async () => {
       </div>
 
       <!-- form body - stage 2 -->
-      <div v-if="regStage === 2" class="border border-custom-blue rounded-b-md w-full flex flex-col items-center py-4 ">
+      <div v-if="regStage === 2" class="border rounded-b-md flex flex-col items-center p-16 ">
 
-        <div class="flex flex-col w-9/12 lg:w-3/5 py-2">
+        <div class="flex flex-col w-11/12 py-2">
           <label class="font-bold flex justify-start" for="username">Username:<span
               class="text-red-500">*</span></label>
           <input v-model="username"
@@ -300,25 +317,37 @@ const registerUser = async () => {
 
       <!-- form body - stage 3 -->
       <div v-if="regStage === 3"
-        class="border border-custom-blue rounded-b-md w-full flex flex-col items-center py-4 px-4">
+        class="border rounded-b-md flex flex-col items-center py-6">
 
-        <div class="flex flex-col items-center py-2">
-          <h1 class="text-xl font-bold">Select technologies you are familiar with:</h1>
+        <div class="flex flex-col items-center">
+          <h1 class="text-xl font-bold w-3/4 text-center">Select technologies you are familiar with:</h1>
         </div>
 
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-10">
+        <input 
+        v-on:keyup.enter="searchTech"
+        v-model="searchTerm"
+        class="pl-2 border border-gray-400 w-11/12 rounded-md py-2 mt-4"
+        type="text" name="" id="" placeholder="Search...">
+
+        <div v-if="searchResults.length > 0" class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
 
           <!-- each icons goes here -->
-          <div v-for="item in techList" :key="item.id" @click="toggleTechSelection(item)" class="hover:bg-gray-200"
+          <div v-for="item in searchResults" :key="item.id" @click="toggleTechSelection(item)" class="hover:bg-gray-200 flex flex-col items-center"
             :class="{ 'bg-gray-200': selectedTech.includes(item), 'cursor-pointer': true, 'p-4': true, 'rounded-md': true, 'text-center': true }">
-            <img v-bind:src="item.img" class="w-28">
+            <img v-bind:src="item.img" class="w-24">
             <p class="text-center font-bold">{{ item.name }}</p>
           </div>
         </div>
 
+        <div v-else class="flex justify-center my-4">
+
+          <p class="text-xl text-center w-9/12">Type the name of any language you are familiar with</p>
+
+        </div>
+
         <!-- form button -->
 
-        <div class="mt-4 py-2 px-10 bg-base font-bold text-white text-xl hover:bg-custom-blue">
+        <div class="mt-4 py-2 px-10 bg-base font-bold text-white text-xl hover:bg-custom-blue cursor-pointer">
           <button @click="registerUser">REGISTER</button>
         </div>
 

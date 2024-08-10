@@ -5,11 +5,11 @@
 
     <!-- status/error message -->
 
-    <div v-if="statusMsg" class="w-2/3 bg-red-500 font-bold md:w-1/3 shadow-xl rounded-md">
-      <p class="py-4 pl-2 text-white"> {{ statusMsg }}</p>
+    <div v-if="statusMsg" class=" bg-red-500 font-bold px-10 md:w-2/4 lg:w-1/3 shadow-md rounded-md">
+      <p class="py-4  text-white"> {{ statusMsg }}</p>
     </div>
 
-    <form form @submit.prevent="userLogin" class="w-2/3 h-1/5 bg-white md:w-2/4 lg:w-1/3 shadow-xl rounded-xl mt-10">
+    <form form @submit.prevent="userLogin" class=" h-3/6 bg-white md:w-2/4 lg:w-1/3 shadow-md rounded-xl mt-10">
 
 
       <!-- form header -->
@@ -19,16 +19,16 @@
 
 
       <!-- form body -->
-      <div class="border border-custom-blue rounded-b-md w-full flex flex-col items-center py-4 ">
+      <div class="border rounded-b-md w-full flex flex-col items-center p-10">
 
-        <div class="flex flex-col w-9/12 py-2">
+        <div class="flex flex-col w-11/12 py-2">
           <label class="font-bold flex justify-start" for="email">Email:</label>
           <input v-model="user_email"
             class="border border-gray-600 rounded-md text-black placeholder:text-black w-full h-10 pl-2" type="text"
             name="email" id="email" placeholder="Email Address">
         </div>
 
-        <div class="flex flex-col w-9/12  py-2">
+        <div class="flex flex-col w-11/12  py-2">
           <label class="font-bold flex justify-start" for="password">Passowrd:</label>
           <input v-model="password"
             class="border border-gray-600 rounded-md text-black placeholder:text-black w-full h-10 pl-2" type="password"
@@ -37,13 +37,13 @@
 
         <!-- form button -->
 
-        <div class="py-2 px-10 bg-base font-bold text-white text-xl hover:bg-custom-blue">
+        <div class="py-2 mt-4 px-10 bg-base font-bold text-white text-xl hover:bg-custom-blue">
           <button>LOG IN</button>
         </div>
 
         <!-- redirect to login/register -->
 
-        <p class="py-2">
+        <p class="py-2 font-bold">
           <RouterLink to="/register">
             Don't have an account? Register <span class="text-base underline">here !</span>
           </RouterLink>
