@@ -2,43 +2,61 @@
     <div class="flex overflow-hidden h-[calc(100vh-112px)]">
 
         <!-- Sidebar -->
-        <div class=" bg-white border-r border-gray-300 w-1/4"
-            >
+        <div class=" bg-white border-r border-gray-300"
+            :class="{ 'w-[calc(16px+48px)]': !isMenuOpen, 'md:w-2/5 lg:w-3/12': isMenuOpen, 'w-full fixed md:relative z-50': isMenuOpen }">
+
+            <div class="absolute" @click="toggleSidebar"
+                :class="{ 'right-4 top-4': isMenuOpen, 'top-24 left-4': !isMenuOpen }">
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-8 text-white font-bold cursor-pointer transition-transform duration-300"
+                    :class="{ 'rotate-180': isMenuOpen }">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+                </svg>
+
+
+            </div>
 
             <!-- Sidebar Header -->
-            <header class="p-4 border-b border-gray-300 flex justify-between items-center bg-base text-white">
+            <header class="border-b border-gray-300 bg-custom-blue text-white"
+                :class="{ 'p-8': !isMenuOpen, 'p-4': isMenuOpen }">
 
-                <h1 v-if="!showSearchBar" class="text-2xl font-semibold">Messenger</h1>
-                <div v-else class="border-b-2 border-white">
-                    <input v-on:keyup.enter="findUser" v-model="findUserInput" type="text" placeholder="Find user..."
-                        class="pl-2 text-white bg-base focus:outline-none text-xl w-[150px] placeholder:text-white">
+                <div v-if="isMenuOpen" class="flex justify-between items-center">
+
+                    <h1 v-if="!showSearchBar" class="text-2xl font-semibold">Messenger</h1>
+                    <div v-else class="">
+                        <input v-on:keyup.enter="findUser" v-model="findUserInput" type="text"
+                            placeholder="Find user..."
+                            class="border-b-2 border-white pl-2 text-white bg-base focus:outline-none text-xl w-3/4 placeholder:text-white">
+                    </div>
+
+                    <div class="relative flex right-8">
+                        <button @click="toggleUserSearch" id="menuButton" class="focus:outline-none">
+                            <svg v-if="!showSearchBar" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+
+                            <svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-8">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+
+
+                        </button>
+
+                    </div>
+
                 </div>
-
-                <div class="relative flex">
-                    <button @click="toggleUserSearch" id="menuButton" class="focus:outline-none">
-                        <svg v-if="!showSearchBar" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="size-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-
-                        <svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="size-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H6.911a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661Z" />
-                        </svg>
-
-
-                    </button>
-
-                </div>
-
-
-
             </header>
 
             <!-- Contact List -->
-            <div class="overflow-y-auto h-screen p-3 mb-9 pb-20">
+            <div class="overflow-y-auto h-screen mb-9 pb-20" :class="{ 'p-2': !isMenuOpen, 'p-3': isMenuOpen }">
+
 
                 <!-- search results -->
                 <div v-if="searchResults.length > 0" v-for="result in searchResults" :key="result"
@@ -58,7 +76,8 @@
                 </div>
 
                 <!-- initiated chats -->
-                <div v-else v-for="user in messengerList" :key="user" @click="fetchMessages(user.user_id)"
+                <div v-else-if="isMenuOpen && searchResults.length === 0" v-for="user in messengerList" :key="user"
+                    @click="fetchMessages(user.user_id)"
                     class="flex items-center mb-4 cursor-pointer hover:bg-gray-100 p-2 rounded-md">
                     <div class="w-12 h-12 bg-gray-300 rounded-full mr-3">
                         <img :src="user.profile_picture" alt="User Avatar" class="w-12 h-12 rounded-full">
@@ -67,6 +86,12 @@
                     <div class="flex-1">
                         <h2 class="text-lg font-semibold">{{ user.username }}</h2>
                         <p class="text-gray-600">Hoorayy!!</p>
+                    </div>
+                </div>
+
+                <div v-else v-for="item in messengerList" :key="item" @click="fetchMessages(item.user_id)">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full">
+                        <img :src="item.profile_picture" alt="User Avatar" class="w-12 h-12 rounded-full">
                     </div>
                 </div>
 
@@ -113,7 +138,8 @@
             </div>
 
             <!-- Chat Input -->
-            <footer class="bg-white border-t border-gray-300 p-4 fixed bottom-0 w-3/4">
+            <footer class="bg-white border-t border-gray-300 p-4 fixed bottom-0"
+                :class="{ 'w-[83%] sm:w-11/12 lg:w-[96%]': !isMenuOpen, 'w-3/5 lg:w-9/12': isMenuOpen }">
                 <div class="flex items-center">
                     <input type="text" placeholder="Type a message..." v-model="messageInput"
                         class="w-full p-2 rounded-md border border-gray-400 focus:outline-none focus:border-blue-500">
@@ -159,14 +185,16 @@ const chatId = ref(null);
 const chatSelected = ref(false);
 const secondaryUserData = ref({});
 
-const isMenuOpen = ref(true);
+const isMenuOpen = ref(false);
 const showMenuControl = ref(false);
 
-
-const sender = ref(null);
-const receiver = ref(null);
-
 const showSearchBar = ref(false);
+
+const toggleSidebar = () => {
+
+    isMenuOpen.value = !isMenuOpen.value;
+    console.log(isMenuOpen.value);
+}
 
 // get data of authenticated user and the list of users which have already initiated a chat
 const fetchAuthUserData = async () => {

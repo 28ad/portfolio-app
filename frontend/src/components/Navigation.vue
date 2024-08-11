@@ -117,7 +117,7 @@ onUnmounted(() => {
       <form @submit.prevent="">
 
         <input type="text" placeholder="Search ..." v-model="searchParam" v-on:keyup.enter="searchUserProfile"
-          class="pl-2 placeholder:text-white text-center md:text-left placeholder:text-center focus:outline-none md:placeholder:text-left text-xl text-white border-b border-white w-32 md:w-60 h-8 bg-custom-blue ">
+          class="pl-2 placeholder:text-white text-center md:text-left placeholder:text-center outline-none md:placeholder:text-left text-xl text-white border-b border-white w-32 md:w-60 h-8 bg-custom-blue ">
 
       </form>
 
