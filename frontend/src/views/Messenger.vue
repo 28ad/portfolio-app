@@ -5,23 +5,23 @@
         <div class=" bg-white border-r border-gray-300"
             :class="{ 'w-[calc(16px+48px)]': !isMenuOpen, 'md:w-2/5 lg:w-3/12': isMenuOpen, 'w-full fixed md:relative z-50': isMenuOpen }">
 
-            <div class="absolute" @click="toggleSidebar"
-                :class="{ 'right-4 top-4': isMenuOpen, 'top-24 left-4': !isMenuOpen }">
-
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor"
-                    class="size-8 text-white font-bold cursor-pointer transition-transform duration-300"
-                    :class="{ 'rotate-180': isMenuOpen }">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
-                </svg>
-
-
-            </div>
-
             <!-- Sidebar Header -->
-            <header class="border-b border-gray-300 bg-custom-blue text-white"
+            <header class="border-b border-gray-300 bg-custom-blue text-white relative w-full"
                 :class="{ 'p-8': !isMenuOpen, 'p-4': isMenuOpen }">
+
+                <div class="absolute" @click="toggleSidebar"
+                    :class="{ 'right-4 top-4': isMenuOpen, 'top-4 left-4': !isMenuOpen }">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor"
+                        class="size-8 text-white font-bold cursor-pointer transition-transform duration-300"
+                        :class="{ 'rotate-180': isMenuOpen }">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+                    </svg>
+
+
+                </div>
 
                 <div v-if="isMenuOpen" class="flex justify-between items-center">
 
@@ -40,8 +40,8 @@
                                     d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
 
-                            <svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="size-8">
+                            <svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-8">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
@@ -392,6 +392,7 @@ const addMessage = async (chatId) => {
 const fetchMessages = async (user2Id) => {
 
     chatSelected.value = true;
+    isMenuOpen.value = false;
 
     try {
 

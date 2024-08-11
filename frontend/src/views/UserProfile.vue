@@ -149,7 +149,7 @@ onMounted(async () => {
                 <!-- individual project card -->
                 <router-link :to="{ name: 'view-project', params: { projectId: pjct.project_uid } }"
                     v-for="(pjct, index) in userProjects" :key="index"
-                    class="border transition-transform transform scale-100 hover:scale-105 duration-500 ease-in-out w-full flex flex-col justify-between cursor-pointer shadow-xl rounded-xl pt-4">
+                    class="border transition-transform transform scale-100 hover:scale-105 duration-500 ease-in-out w-full max-h-[350px] min-h-[350px] flex flex-col justify-between cursor-pointer shadow-xl rounded-xl pt-4">
 
                     <!-- image and title -->
                     <div class="flex flex-col items-center">
